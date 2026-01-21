@@ -2,9 +2,12 @@ import os
 from datetime import datetime
 from dotenv import load_dotenv
 import requests
-from dataclasses import dataclass
+from dataclasses import dataclass,field
 import asyncio
 import aiohttp
+from typing import Dict, List
+import json
+from dataclasses import asdict
 
 @dataclass
 class t_mastery:
@@ -14,7 +17,12 @@ class t_mastery:
     last_play: float
     champImageUrl : str
     
-    
+@dataclass
+class joueur:
+    name: str
+    level: str
+    profilePicture : str
+
 @dataclass
 class MatchStats:
     # Identité
@@ -51,6 +59,44 @@ class MatchStats:
     def gold_per_minute(self):
         return self.gold_earned / (self.duration_ss / 60)
 
+
+@dataclass
+class ChampionSummary:
+    """Stocke la synthèse pour un champion précis"""
+    name: str
+    games: int = 0
+    wins: int = 0
+    kills: int = 0
+    deaths: int = 0
+    assists: int = 0
+    gold: int = 0
+    cs: int = 0
+    damage: int = 0
+
+    @property
+    def winrate(self) -> float:
+        return (self.wins / self.games) * 100 if self.games > 0 else 0
+
+    @property
+    def kda(self) -> float:
+        return (self.kills + self.assists) / max(1, self.deaths)
+
+@dataclass
+class GlobalReport:
+    """Stocke le résultat final de toute l'analyse"""
+    total_matches: int
+    avg_gold: float
+    avg_cs: float
+    winrate_global: float
+    # Dictionnaire liant le nom du champion à son objet ChampionSummary
+    champions: Dict[str, ChampionSummary] = field(default_factory=dict)
+
+@dataclass
+class FinalExport:
+    player_info: joueur
+    masteries: List[t_mastery]
+    match_report: GlobalReport
+    
 # /D:/Iut/lolWatcher/main.py
 # Simple Riot API client to fetch a summoner and their recent matches.
 # Requires: pip install requests
@@ -72,8 +118,8 @@ headers = {
 REGION_URL = "https://europe.api.riotgames.com"
 LOL_URL = "https://euw1.api.riotgames.com/lol"
 
-gameName = "ChampiFou"
-tagLine = "CRAZY"
+gameName = "cascade2chiasse"
+tagLine = "caca"
 
 # Construction de l'URL finale
 url = REGION_URL
@@ -95,7 +141,6 @@ champIdAndInfo.sort()
 def time_past_in_hour(timestamp_ms):
     diff_secondes = (datetime.now().timestamp()) - (timestamp_ms / 1000)
     heures_totale = diff_secondes // 3600
-    
     return heures_totale
 
 def get_puuid(gameName,tagLine):
@@ -108,7 +153,15 @@ def get_puuid(gameName,tagLine):
     else:
         print(f"le joueur :{gameName}#{tagLine} N'est pas dans la base de donées en Europe")
     return dataPuuid["puuid"]
-    
+
+
+def get_player_profile(puuid):
+    endPointProfile = f"/summoner/v4/summoners/by-puuid/{puuid}"
+    url = LOL_URL+endPointProfile
+    response = requests.get(url,headers=headers)
+    data = response.json()
+    urlP = f"https://ddragon.leagueoflegends.com/cdn/16.2.1/img/profileicon/{data["profileIconId"]}.png"
+    return joueur(name=gameName,level=data["summonerLevel"],profilePicture=urlP)
     
 def get_the_masteries(puuid):
     endPoinForMasteries = f"/champion-mastery/v4/champion-masteries/by-puuid/{puuid}/top?count=5"
@@ -140,7 +193,7 @@ def treats_masteries_information(champMasteries,champIdAndInfo):
     return tabChampsBestMasteries
 
 def get_id_recents_games(puuid):
-    endPointForMatch=f"/lol/match/v5/matches/by-puuid/{puuid}/ids?start=0&count=5"
+    endPointForMatch=f"/lol/match/v5/matches/by-puuid/{puuid}/ids?start=0&count=40"
     url = REGION_URL+endPointForMatch
     response = requests.get(url,headers=headers)
     if(response.status_code == 200):
@@ -149,10 +202,53 @@ def get_id_recents_games(puuid):
         print(f"Erreur dans la récuperation des matchs du joueur :{gameName}#{tagLine}")
     return dataGames
 
+def analyze_to_class(tabMatchStats: List[MatchStats]) -> GlobalReport:
+    # On filtre les remakes
+    valid_matches = [m for m in tabMatchStats if m.duration_ss > 300]
+    nb = len(valid_matches)
+    
+    if nb == 0:
+        return None
 
+    # Calculs globaux
+    g_wins = sum(1 for m in valid_matches if m.win)
+    g_gold = sum(m.gold_earned for m in valid_matches) / nb
+    g_cs = sum(m.total_cs for m in valid_matches) / nb
+    
+    # Création de l'objet de rapport
+    report = GlobalReport(
+        total_matches=nb,
+        avg_gold=g_gold,
+        avg_cs=g_cs,
+        winrate_global=(g_wins / nb) * 100
+    )
 
-import asyncio
-import aiohttp
+    # Remplissage des stats par champion
+    for m in valid_matches:
+        if m.champion_name not in report.champions:
+            report.champions[m.champion_name] = ChampionSummary(name=m.champion_name)
+        
+        c = report.champions[m.champion_name]
+        c.games += 1
+        c.wins += 1 if m.win else 0
+        c.kills += m.kills
+        c.deaths += m.deaths
+        c.assists += m.assists
+        c.gold += m.gold_earned
+        c.cs += m.total_cs
+        c.damage += m.damage_dealt
+
+    return report
+
+def save_report_to_json(report, filename="stats_result.json"):
+    # asdict transforme récursivement l'objet et les sous-objets (champions) en dictionnaires
+    report_dict = asdict(report)
+    
+    with open(filename, "w", encoding="utf-8") as f:
+        # indent=4 permet de rendre le JSON lisible (pas tout sur une seule ligne)
+        json.dump(report_dict, f, indent=4, ensure_ascii=False)
+    
+    print(f"✅ Rapport sauvegardé avec succès dans {filename}")
 
 # 1. Fonction pour récupérer UN SEUL match
 async def fetch_one_match(session, match_id, puuidJoueur):
@@ -167,7 +263,7 @@ async def fetch_one_match(session, match_id, puuidJoueur):
         participants = match["info"]["participants"]
 
         for p in participants:
-            if p["puuid"] == puuidJoueur:
+            if p["puuid"] == puuidJoueur and match["info"]["gameMode"] == "CLASSIC":
                 # On retourne l'objet MatchStats
                 return MatchStats(
                     champion_id=p["championId"],
@@ -203,14 +299,29 @@ async def analyse_recent_games_async(recentsGames, puuidJoueur):
         return [r for r in results if r is not None]
 
 async def main():
-    puuid = get_puuid(gameName,tagLine)
+    # 1. Récupération des données de base
+    puuid = get_puuid(gameName, tagLine)
+    player = get_player_profile(puuid)
     champMasteries = get_the_masteries(puuid)
-    tabChampsBestMasteries = treats_masteries_information(champMasteries,champIdAndInfo)
+    
+    # 2. Traitement des maîtrises
+    tabChampsBestMasteries = treats_masteries_information(champMasteries, champIdAndInfo)
+    
+    # 3. Récupération et analyse des matchs
     idGames = get_id_recents_games(puuid)
     tabMatchStats = await analyse_recent_games_async(idGames, puuid)
-    print(tabMatchStats[0])
-    pass
-
+    report = analyze_to_class(tabMatchStats)
+    
+    # 4. Regroupement de TOUTES les données
+    # On crée l'objet final qui contient tout
+    final_data = FinalExport(
+        player_info=player,
+        masteries=tabChampsBestMasteries,
+        match_report=report
+    )
+    
+    # 5. Export en JSON
+    save_report_to_json(final_data, filename=f"stats_{gameName}.json")
 
 if __name__ == "__main__":
     asyncio.run(main())
