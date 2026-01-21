@@ -1,0 +1,151 @@
+{
+    "player_info": {
+        "name": "cascade2chiasse",
+        "level": 266,
+        "profilePicture": "https://ddragon.leagueoflegends.com/cdn/16.2.1/img/profileicon/3495.png"
+    },
+    "masteries": [
+        {
+            "name": "Darius",
+            "level": 57,
+            "points": 596597,
+            "last_play": 1.0,
+            "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Darius_0.jpg"
+        },
+        {
+            "name": "Garen",
+            "level": 12,
+            "points": 99069,
+            "last_play": 3.0,
+            "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Garen_0.jpg"
+        },
+        {
+            "name": "Vayne",
+            "level": 11,
+            "points": 91478,
+            "last_play": 50.0,
+            "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vayne_0.jpg"
+        },
+        {
+            "name": "Nasus",
+            "level": 11,
+            "points": 86713,
+            "last_play": 1929.0,
+            "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nasus_0.jpg"
+        },
+        {
+            "name": "Jhin",
+            "level": 10,
+            "points": 79544,
+            "last_play": 266.0,
+            "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jhin_0.jpg"
+        }
+    ],
+    "match_report": {
+        "total_matches": 14,
+        "avg_gold": 12751.714285714286,
+        "avg_cs": 162.78571428571428,
+        "winrate_global": 50.0,
+        "champions": {
+            "Malphite": {
+                "name": "Malphite",
+                "games": 1,
+                "wins": 0,
+                "kills": 0,
+                "deaths": 5,
+                "assists": 2,
+                "gold": 3784,
+                "cs": 16,
+                "damage": 5801
+            },
+            "Tryndamere": {
+                "name": "Tryndamere",
+                "games": 1,
+                "wins": 0,
+                "kills": 12,
+                "deaths": 9,
+                "assists": 3,
+                "gold": 15165,
+                "cs": 177,
+                "damage": 33069
+            },
+            "Pantheon": {
+                "name": "Pantheon",
+                "games": 1,
+                "wins": 0,
+                "kills": 1,
+                "deaths": 10,
+                "assists": 8,
+                "gold": 7983,
+                "cs": 41,
+                "damage": 9915
+            },
+            "FiddleSticks": {
+                "name": "FiddleSticks",
+                "games": 3,
+                "wins": 2,
+                "kills": 46,
+                "deaths": 20,
+                "assists": 35,
+                "gold": 55916,
+                "cs": 742,
+                "damage": 147483
+            },
+            "Singed": {
+                "name": "Singed",
+                "games": 1,
+                "wins": 1,
+                "kills": 11,
+                "deaths": 2,
+                "assists": 2,
+                "gold": 10347,
+                "cs": 163,
+                "damage": 19785
+            },
+            "Vayne": {
+                "name": "Vayne",
+                "games": 2,
+                "wins": 1,
+                "kills": 18,
+                "deaths": 8,
+                "assists": 6,
+                "gold": 23555,
+                "cs": 296,
+                "damage": 47910
+            },
+            "Kassadin": {
+                "name": "Kassadin",
+                "games": 3,
+                "wins": 2,
+                "kills": 26,
+                "deaths": 18,
+                "assists": 20,
+                "gold": 34431,
+                "cs": 468,
+                "damage": 77213
+            },
+            "Darius": {
+                "name": "Darius",
+                "games": 1,
+                "wins": 1,
+                "kills": 5,
+                "deaths": 4,
+                "assists": 11,
+                "gold": 10692,
+                "cs": 168,
+                "damage": 22153
+            },
+            "Mordekaiser": {
+                "name": "Mordekaiser",
+                "games": 1,
+                "wins": 0,
+                "kills": 15,
+                "deaths": 9,
+                "assists": 7,
+                "gold": 16651,
+                "cs": 208,
+                "damage": 49530
+            }
+        }
+    }
+}
