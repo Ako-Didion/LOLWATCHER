@@ -1,0 +1,235 @@
+
+body{
+    background-color: rgb(35, 37, 43);
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#player-panel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+    padding: 2em;
+}
+
+.player-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+    overflow: hidden;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: #575757 0.4px solid;
+    height: 500px;
+
+}
+
+.header-card {
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    height: 100px;
+    width: 600px;
+    padding: 2em;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+
+.player-card img.profile-pic {
+    height: 80px;
+    width: 80px;
+    border-radius: 5%;
+    margin-right: 1em;
+    border: 2px solid white;
+}
+
+.player-info h2{
+    margin: 0;
+    font-size: 1.8em;
+ 
+}
+
+.player-info p {
+    margin: 0.2em 0;
+    font-size: 1em;
+}
+
+.level-rank{
+    display: flex;
+    gap: 1em;
+}
+
+.level-rank .level, .level-rank .rank {
+    padding: 0.3em 0.6em;
+    border-radius: 0.3em;
+    font-weight: bold;
+    border: 1px solid;
+}
+
+.level-rank .level {
+    color: #a3d3ff; /* Green for level */
+    
+}
+
+.level-rank .rank {
+    color: #eeffa3; /* Blue for rank */
+    
+}
+
+.section-stats {
+    width: 100%;
+    background-color: rgba(16, 23, 32, 1);
+    border-top: #575757 0.4px solid;
+    display: flex;
+    height: 500px;
+
+
+}
+
+.masteries-div {
+    width: 21%;
+    padding: 1em;
+    background-color: rgba(16, 23, 32, 1);
+    border-right: #575757 0.4px solid;
+
+}
+
+.section-stats h3, .recent-games-div h3 {
+    color: #ffffff;
+    margin-top: 0;
+    font-size: 1em;
+    padding-bottom: 0.5em;
+    margin: 0 0 0.5em 0;
+}
+
+.mastery-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.mastery-text p {
+    margin: 0;
+    margin-left: 0.5em;
+    font-size: 0.9em;
+}
+
+.mastery-item img {
+    object-fit: cover;
+    height: 40px;
+    width: 40px;
+    border-radius: 10%;
+}
+
+.champ-name {
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.champ-mastery {
+    font-size: 0.8em;
+    color: #bebebe;
+}
+
+.recent-games-div {
+    width: 50%;
+    height: 340px;
+    background-color: rgba(16, 23, 32, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    overflow-y: scroll;
+    border-right: #575757 0.4px solid;
+    scrollbar-width: none;    
+}
+
+.recent-games-div h3 {
+    position: sticky;
+    background-color: rgba(16, 23, 32, 1);
+    z-index: 1;
+    top: 0;
+    padding-top : 1em ;
+    padding-left : 1em ;
+    margin: 0;
+    margin-top: -1em ;
+    
+
+}
+
+.game-champ-name {
+    font-weight: bold;
+    font-size: 1em;
+    margin: 0%;
+    margin-bottom: 0.3em ;
+
+}
+
+.game-item{
+    background-color: rgba(107, 108, 122, 0.1);
+    padding: 0.6em;
+    border-radius: 0.3em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.game-item img {
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+    border-radius: 10%;
+    margin-right: 0.5em;
+}
+
+.game-stats-text {
+    font-size: 0.8em;
+    font-weight: 600;
+    margin: 0.1em ;
+    color: #ffffff;
+}
+
+.match-moy-div {
+    width: 34%;
+    padding: 1em;
+    background-color: rgba(16, 23, 32, 1);
+
+}
+
+.match-moy-header {
+    display: flex;
+    align-items: center;
+    background-color: rgba(16, 23, 32, 1);
+    z-index: 1;
+    gap: 0.5em;
+    
+}
+
+.match-moy-header h3{
+    margin-top: 0;
+    font-size: 1em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.match-moy-header img {
+    height: 20px;
+    width: 20px;
+
+}
+
+.match-moy-text {
+    font-size: 0.9em;
+    font-weight: 600;
+    margin: 1em 0;
+    color: #ffffff;
+    padding : 0.2em ;
+    width: fit-content ;
+    border-radius: 0.3em ;
+}

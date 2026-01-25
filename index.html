@@ -1,131 +1,17 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoL Stats - Dashboard Dynamique</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background-color: #0f172a; color: white; font-family: 'Segoe UI', sans-serif; }
-        .card { background-color: #1e293b; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
-        .win-text { color: #34d399; }
-        .loss-text { color: #f87171; }
-        .kda-good { color: #60a5fa; }
-        .kda-bad { color: #f87171; }
-    </style>
+    <title>LOLWATCHER</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="p-4 md:p-8">
-    <div id="app" class="max-w-6xl mx-auto hidden">
-        
-        <div class="flex flex-col md:flex-row items-center gap-6 mb-8 card border-l-4 border-blue-500">
-            <img id="player-img" src="" class="w-24 h-24 rounded-full border-2 border-slate-700">
-            <div>
-                <h1 id="player-name" class="text-4xl font-bold"></h1>
-                <p id="player-level" class="text-blue-400 font-semibold"></p>
-            </div>
-            <div class="md:ml-auto flex gap-6 text-center">
-                <div>
-                    <p class="text-gray-400 uppercase text-xs">Winrate</p>
-                    <p id="global-wr" class="text-2xl font-bold"></p>
-                </div>
-                <div>
-                    <p class="text-gray-400 uppercase text-xs">CS Moyen</p>
-                    <p id="global-cs" class="text-2xl font-bold"></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div id="masteries-list" class="space-y-4">
-                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">🔥 Top Masteries</h2>
-                </div>
-
-            <div class="md:col-span-2 space-y-4">
-                <h2 class="text-xl font-bold mb-4">🛡️ Performances (Matchs récents)</h2>
-                <div class="card overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="text-gray-400 border-b border-slate-700 text-sm">
-                                <th class="pb-4">Champion</th>
-                                <th class="pb-4 text-center">Parties</th>
-                                <th class="pb-4">Winrate</th>
-                                <th class="pb-4">KDA Moyen</th>
-                                <th class="pb-4 text-right">Dégâts / Match</th>
-                            </tr>
-                        </thead>
-                        <tbody id="champions-table-body" class="divide-y divide-slate-700">
-                            </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="status" class="text-center mt-20 text-gray-400">Chargement des données...</div>
-
-    <script>
-        async function loadStats() {
-            try {
-                const response = await fetch('stats_cascade2chiasse.json');
-                const data = await response.json();
-
-                // 1. Remplir le Header
-                document.getElementById('player-name').innerText = data.player_info.name;
-                document.getElementById('player-level').innerText = "Niveau " + data.player_info.level;
-                document.getElementById('player-img').src = data.player_info.profilePicture;
-                document.getElementById('global-wr').innerText = data.match_report.winrate_global.toFixed(1) + "%";
-                document.getElementById('global-wr').className = data.match_report.winrate_global >= 50 ? "text-2xl font-bold win-text" : "text-2xl font-bold loss-text";
-                document.getElementById('global-cs').innerText = data.match_report.avg_cs.toFixed(1);
-
-                // 2. Remplir les Masteries
-                const masteriesList = document.getElementById('masteries-list');
-                data.masteries.forEach(m => {
-                    masteriesList.innerHTML += `
-                        <div class="card flex items-center gap-4 p-4 hover:bg-slate-700 transition">
-                            <img src="${m.champImageUrl}" class="w-14 h-14 rounded-lg object-cover">
-                            <div>
-                                <p class="font-bold">${m.name}</p>
-                                <p class="text-xs text-gray-400">Lvl ${m.level} • ${(m.points/1000).toFixed(0)}k pts</p>
-                            </div>
-                        </div>
-                    `;
-                });
-
-                // 3. Remplir le Tableau des Champions
-                const tableBody = document.getElementById('champions-table-body');
-                const champs = Object.values(data.match_report.champions);
-                
-                // On trie par nombre de parties
-                champs.sort((a, b) => b.games - a.games);
-
-                champs.forEach(c => {
-                    const wr = ((c.wins / c.games) * 100).toFixed(0);
-                    const kda = ((c.kills + c.assists) / Math.max(1, c.deaths)).toFixed(2);
-                    const avgDmg = (c.damage / c.games).toLocaleString();
-                    const kdaColor = kda >= 3 ? 'kda-good' : (kda < 2 ? 'kda-bad' : '');
-
-                    tableBody.innerHTML += `
-                        <tr class="hover:bg-slate-800/50">
-                            <td class="py-4 font-bold text-blue-300">${c.name}</td>
-                            <td class="text-center">${c.games}</td>
-                            <td class="${wr >= 50 ? 'win-text' : 'loss-text'} font-semibold">${wr}%</td>
-                            <td><span class="${kdaColor} font-bold">${kda}</span> <span class="text-xs text-gray-500">(${c.kills}/${c.deaths}/${c.assists})</span></td>
-                            <td class="text-right text-gray-300">${avgDmg}</td>
-                        </tr>
-                    `;
-                });
-
-                // Afficher l'app et cacher le status
-                document.getElementById('app').classList.remove('hidden');
-                document.getElementById('status').classList.add('hidden');
-
-            } catch (error) {
-                console.error(error);
-                document.getElementById('status').innerText = "Erreur : Impossible de charger stats_result.json. (Vérifiez qu'il est bien à côté du fichier HTML)";
-            }
-        }
-
-        loadStats();
-    </script>
+<body>
+    <main>
+        <section id="player-panel">
+           
+        </section>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>

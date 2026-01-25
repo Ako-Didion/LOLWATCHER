@@ -1,0 +1,672 @@
+{
+    "finalList": [
+        {
+            "player_info": {
+                "name": "Crowzyflette",
+                "level": 58,
+                "profilePicture": "https://ddragon.leagueoflegends.com/cdn/16.2.1/img/profileicon/3804.png",
+                "rank": "BRONZE"
+            },
+            "masteries": [
+                {
+                    "name": "Amumu",
+                    "level": 8,
+                    "points": 53768,
+                    "last_play": 46.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Amumu_0.jpg"
+                },
+                {
+                    "name": "Volibear",
+                    "level": 6,
+                    "points": 40422,
+                    "last_play": 29.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Volibear_0.jpg"
+                },
+                {
+                    "name": "Sejuani",
+                    "level": 6,
+                    "points": 31699,
+                    "last_play": 6.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sejuani_0.jpg"
+                },
+                {
+                    "name": "DrMundo",
+                    "level": 5,
+                    "points": 26007,
+                    "last_play": 50.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/DrMundo_0.jpg"
+                },
+                {
+                    "name": "Shyvana",
+                    "level": 4,
+                    "points": 19404,
+                    "last_play": 248.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Shyvana_0.jpg"
+                }
+            ],
+            "match_report": {
+                "total_matches": 56,
+                "avg_gold": 11547.42857142857,
+                "avg_cs": 188.16071428571428,
+                "winrate_global": 51.78571428571429,
+                "champions": {
+                    "Kayn": {
+                        "name": "Kayn",
+                        "role": "JUNGLE",
+                        "games": 1,
+                        "wins": 1,
+                        "kills": 15,
+                        "deaths": 4,
+                        "assists": 11,
+                        "gold": 19050,
+                        "cs": 247,
+                        "damage": 54390
+                    },
+                    "Warwick": {
+                        "name": "Warwick",
+                        "role": "JUNGLE",
+                        "games": 7,
+                        "wins": 4,
+                        "kills": 45,
+                        "deaths": 30,
+                        "assists": 40,
+                        "gold": 83503,
+                        "cs": 1247,
+                        "damage": 94475
+                    },
+                    "Sejuani": {
+                        "name": "Sejuani",
+                        "role": "JUNGLE",
+                        "games": 9,
+                        "wins": 6,
+                        "kills": 34,
+                        "deaths": 33,
+                        "assists": 110,
+                        "gold": 111418,
+                        "cs": 1771,
+                        "damage": 134588
+                    },
+                    "Skarner": {
+                        "name": "Skarner",
+                        "role": "JUNGLE",
+                        "games": 4,
+                        "wins": 0,
+                        "kills": 19,
+                        "deaths": 29,
+                        "assists": 53,
+                        "gold": 53871,
+                        "cs": 731,
+                        "damage": 75268
+                    },
+                    "Yorick": {
+                        "name": "Yorick",
+                        "role": "JUNGLE",
+                        "games": 2,
+                        "wins": 0,
+                        "kills": 3,
+                        "deaths": 12,
+                        "assists": 3,
+                        "gold": 19711,
+                        "cs": 375,
+                        "damage": 17017
+                    },
+                    "Volibear": {
+                        "name": "Volibear",
+                        "role": "JUNGLE",
+                        "games": 3,
+                        "wins": 3,
+                        "kills": 8,
+                        "deaths": 9,
+                        "assists": 28,
+                        "gold": 32795,
+                        "cs": 568,
+                        "damage": 25868
+                    },
+                    "Trundle": {
+                        "name": "Trundle",
+                        "role": "JUNGLE",
+                        "games": 2,
+                        "wins": 0,
+                        "kills": 5,
+                        "deaths": 20,
+                        "assists": 5,
+                        "gold": 29468,
+                        "cs": 506,
+                        "damage": 34501
+                    },
+                    "Gwen": {
+                        "name": "Gwen",
+                        "role": "JUNGLE",
+                        "games": 1,
+                        "wins": 0,
+                        "kills": 2,
+                        "deaths": 3,
+                        "assists": 0,
+                        "gold": 8315,
+                        "cs": 161,
+                        "damage": 7776
+                    },
+                    "Ivern": {
+                        "name": "Ivern",
+                        "role": "JUNGLE",
+                        "games": 1,
+                        "wins": 0,
+                        "kills": 0,
+                        "deaths": 3,
+                        "assists": 0,
+                        "gold": 4550,
+                        "cs": 77,
+                        "damage": 1247
+                    },
+                    "Viego": {
+                        "name": "Viego",
+                        "role": "JUNGLE",
+                        "games": 2,
+                        "wins": 1,
+                        "kills": 7,
+                        "deaths": 10,
+                        "assists": 6,
+                        "gold": 20582,
+                        "cs": 363,
+                        "damage": 21699
+                    },
+                    "Mordekaiser": {
+                        "name": "Mordekaiser",
+                        "role": "JUNGLE",
+                        "games": 2,
+                        "wins": 0,
+                        "kills": 11,
+                        "deaths": 22,
+                        "assists": 13,
+                        "gold": 25761,
+                        "cs": 355,
+                        "damage": 59437
+                    },
+                    "Amumu": {
+                        "name": "Amumu",
+                        "role": "JUNGLE",
+                        "games": 8,
+                        "wins": 7,
+                        "kills": 26,
+                        "deaths": 27,
+                        "assists": 74,
+                        "gold": 87773,
+                        "cs": 1509,
+                        "damage": 102049
+                    },
+                    "JarvanIV": {
+                        "name": "JarvanIV",
+                        "role": "JUNGLE",
+                        "games": 3,
+                        "wins": 1,
+                        "kills": 4,
+                        "deaths": 15,
+                        "assists": 25,
+                        "gold": 29337,
+                        "cs": 509,
+                        "damage": 22048
+                    },
+                    "Aatrox": {
+                        "name": "Aatrox",
+                        "role": "JUNGLE",
+                        "games": 1,
+                        "wins": 0,
+                        "kills": 1,
+                        "deaths": 7,
+                        "assists": 3,
+                        "gold": 10966,
+                        "cs": 230,
+                        "damage": 7439
+                    },
+                    "DrMundo": {
+                        "name": "DrMundo",
+                        "role": "JUNGLE",
+                        "games": 2,
+                        "wins": 2,
+                        "kills": 2,
+                        "deaths": 0,
+                        "assists": 8,
+                        "gold": 12242,
+                        "cs": 240,
+                        "damage": 8011
+                    },
+                    "Malphite": {
+                        "name": "Malphite",
+                        "role": "JUNGLE",
+                        "games": 1,
+                        "wins": 0,
+                        "kills": 2,
+                        "deaths": 5,
+                        "assists": 7,
+                        "gold": 14043,
+                        "cs": 241,
+                        "damage": 14618
+                    },
+                    "Rammus": {
+                        "name": "Rammus",
+                        "role": "JUNGLE",
+                        "games": 1,
+                        "wins": 0,
+                        "kills": 2,
+                        "deaths": 8,
+                        "assists": 5,
+                        "gold": 7494,
+                        "cs": 112,
+                        "damage": 5530
+                    },
+                    "Shyvana": {
+                        "name": "Shyvana",
+                        "role": "JUNGLE",
+                        "games": 5,
+                        "wins": 4,
+                        "kills": 28,
+                        "deaths": 22,
+                        "assists": 36,
+                        "gold": 65553,
+                        "cs": 1087,
+                        "damage": 104008
+                    },
+                    "Nunu": {
+                        "name": "Nunu",
+                        "role": "JUNGLE",
+                        "games": 1,
+                        "wins": 0,
+                        "kills": 2,
+                        "deaths": 3,
+                        "assists": 4,
+                        "gold": 10224,
+                        "cs": 208,
+                        "damage": 8365
+                    }
+                }
+            }
+        },
+        {
+            "player_info": {
+                "name": "Gaspachou",
+                "level": 62,
+                "profilePicture": "https://ddragon.leagueoflegends.com/cdn/16.2.1/img/profileicon/1437.png",
+                "rank": "BRONZE"
+            },
+            "masteries": [
+                {
+                    "name": "Ahri",
+                    "level": 14,
+                    "points": 121915,
+                    "last_play": 166.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg"
+                },
+                {
+                    "name": "Smolder",
+                    "level": 6,
+                    "points": 39857,
+                    "last_play": 219.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Smolder_0.jpg"
+                },
+                {
+                    "name": "Galio",
+                    "level": 6,
+                    "points": 36935,
+                    "last_play": 127.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Galio_0.jpg"
+                },
+                {
+                    "name": "Ekko",
+                    "level": 5,
+                    "points": 23031,
+                    "last_play": 144.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg"
+                },
+                {
+                    "name": "Caitlyn",
+                    "level": 4,
+                    "points": 20229,
+                    "last_play": 236.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Caitlyn_0.jpg"
+                }
+            ],
+            "match_report": {
+                "total_matches": 26,
+                "avg_gold": 11032.961538461539,
+                "avg_cs": 189.03846153846155,
+                "winrate_global": 50.0,
+                "champions": {
+                    "Mel": {
+                        "name": "Mel",
+                        "role": "MIDDLE",
+                        "games": 4,
+                        "wins": 1,
+                        "kills": 29,
+                        "deaths": 27,
+                        "assists": 21,
+                        "gold": 49639,
+                        "cs": 829,
+                        "damage": 106233
+                    },
+                    "Ahri": {
+                        "name": "Ahri",
+                        "role": "MIDDLE",
+                        "games": 5,
+                        "wins": 1,
+                        "kills": 35,
+                        "deaths": 24,
+                        "assists": 25,
+                        "gold": 60256,
+                        "cs": 1067,
+                        "damage": 127272
+                    },
+                    "Kennen": {
+                        "name": "Kennen",
+                        "role": "MIDDLE",
+                        "games": 1,
+                        "wins": 0,
+                        "kills": 1,
+                        "deaths": 7,
+                        "assists": 8,
+                        "gold": 7735,
+                        "cs": 142,
+                        "damage": 14474
+                    },
+                    "Galio": {
+                        "name": "Galio",
+                        "role": "MIDDLE",
+                        "games": 3,
+                        "wins": 3,
+                        "kills": 7,
+                        "deaths": 4,
+                        "assists": 28,
+                        "gold": 32546,
+                        "cs": 641,
+                        "damage": 41370
+                    },
+                    "Taliyah": {
+                        "name": "Taliyah",
+                        "role": "MIDDLE",
+                        "games": 5,
+                        "wins": 2,
+                        "kills": 18,
+                        "deaths": 26,
+                        "assists": 39,
+                        "gold": 53134,
+                        "cs": 929,
+                        "damage": 95129
+                    },
+                    "Ekko": {
+                        "name": "Ekko",
+                        "role": "MIDDLE",
+                        "games": 8,
+                        "wins": 6,
+                        "kills": 48,
+                        "deaths": 33,
+                        "assists": 48,
+                        "gold": 83547,
+                        "cs": 1307,
+                        "damage": 135909
+                    }
+                }
+            }
+        },
+        {
+            "player_info": {
+                "name": "HowKillStars",
+                "level": 158,
+                "profilePicture": "https://ddragon.leagueoflegends.com/cdn/16.2.1/img/profileicon/3879.png",
+                "rank": "SILVER"
+            },
+            "masteries": [
+                {
+                    "name": "Kled",
+                    "level": 30,
+                    "points": 344606,
+                    "last_play": 1.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kled_0.jpg"
+                },
+                {
+                    "name": "Braum",
+                    "level": 12,
+                    "points": 145566,
+                    "last_play": 39867.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Braum_0.jpg"
+                },
+                {
+                    "name": "Jax",
+                    "level": 10,
+                    "points": 92882,
+                    "last_play": 4.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jax_0.jpg"
+                },
+                {
+                    "name": "MissFortune",
+                    "level": 9,
+                    "points": 76078,
+                    "last_play": 740.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MissFortune_0.jpg"
+                },
+                {
+                    "name": "Gnar",
+                    "level": 9,
+                    "points": 74891,
+                    "last_play": 5.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Gnar_0.jpg"
+                }
+            ],
+            "match_report": {
+                "total_matches": 61,
+                "avg_gold": 10869.245901639344,
+                "avg_cs": 162.04918032786884,
+                "winrate_global": 42.62295081967213,
+                "champions": {
+                    "Kled": {
+                        "name": "Kled",
+                        "role": "TOP",
+                        "games": 12,
+                        "wins": 5,
+                        "kills": 69,
+                        "deaths": 62,
+                        "assists": 107,
+                        "gold": 141740,
+                        "cs": 1986,
+                        "damage": 270824
+                    },
+                    "Jax": {
+                        "name": "Jax",
+                        "role": "TOP",
+                        "games": 13,
+                        "wins": 5,
+                        "kills": 61,
+                        "deaths": 91,
+                        "assists": 64,
+                        "gold": 143219,
+                        "cs": 2018,
+                        "damage": 227015
+                    },
+                    "Gnar": {
+                        "name": "Gnar",
+                        "role": "TOP",
+                        "games": 3,
+                        "wins": 0,
+                        "kills": 14,
+                        "deaths": 33,
+                        "assists": 9,
+                        "gold": 28539,
+                        "cs": 454,
+                        "damage": 67831
+                    },
+                    "Anivia": {
+                        "name": "Anivia",
+                        "role": "MIDDLE",
+                        "games": 4,
+                        "wins": 3,
+                        "kills": 14,
+                        "deaths": 26,
+                        "assists": 46,
+                        "gold": 38872,
+                        "cs": 552,
+                        "damage": 77927
+                    },
+                    "DrMundo": {
+                        "name": "DrMundo",
+                        "role": "TOP",
+                        "games": 17,
+                        "wins": 11,
+                        "kills": 45,
+                        "deaths": 81,
+                        "assists": 111,
+                        "gold": 177149,
+                        "cs": 2831,
+                        "damage": 338615
+                    },
+                    "Fiora": {
+                        "name": "Fiora",
+                        "role": "TOP",
+                        "games": 2,
+                        "wins": 0,
+                        "kills": 15,
+                        "deaths": 31,
+                        "assists": 21,
+                        "gold": 38997,
+                        "cs": 535,
+                        "damage": 86207
+                    },
+                    "Ornn": {
+                        "name": "Ornn",
+                        "role": "TOP",
+                        "games": 2,
+                        "wins": 1,
+                        "kills": 4,
+                        "deaths": 11,
+                        "assists": 18,
+                        "gold": 20506,
+                        "cs": 332,
+                        "damage": 36049
+                    },
+                    "Ashe": {
+                        "name": "Ashe",
+                        "role": "BOTTOM",
+                        "games": 3,
+                        "wins": 1,
+                        "kills": 22,
+                        "deaths": 16,
+                        "assists": 19,
+                        "gold": 30908,
+                        "cs": 461,
+                        "damage": 46207
+                    },
+                    "MissFortune": {
+                        "name": "MissFortune",
+                        "role": "BOTTOM",
+                        "games": 4,
+                        "wins": 0,
+                        "kills": 12,
+                        "deaths": 26,
+                        "assists": 11,
+                        "gold": 33824,
+                        "cs": 580,
+                        "damage": 41868
+                    },
+                    "FiddleSticks": {
+                        "name": "FiddleSticks",
+                        "role": "JUNGLE",
+                        "games": 1,
+                        "wins": 0,
+                        "kills": 4,
+                        "deaths": 7,
+                        "assists": 12,
+                        "gold": 9270,
+                        "cs": 136,
+                        "damage": 19006
+                    }
+                }
+            }
+        },
+        {
+            "player_info": {
+                "name": "TheBonkMaster",
+                "level": 619,
+                "profilePicture": "https://ddragon.leagueoflegends.com/cdn/16.2.1/img/profileicon/6622.png",
+                "rank": "UNRANKED"
+            },
+            "masteries": [
+                {
+                    "name": "Sett",
+                    "level": 17,
+                    "points": 155957,
+                    "last_play": 166.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sett_0.jpg"
+                },
+                {
+                    "name": "Ezreal",
+                    "level": 15,
+                    "points": 134747,
+                    "last_play": 646.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ezreal_0.jpg"
+                },
+                {
+                    "name": "Pantheon",
+                    "level": 15,
+                    "points": 132159,
+                    "last_play": 2.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Pantheon_0.jpg"
+                },
+                {
+                    "name": "Kayn",
+                    "level": 12,
+                    "points": 113311,
+                    "last_play": 383.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kayn_0.jpg"
+                },
+                {
+                    "name": "Jhin",
+                    "level": 12,
+                    "points": 98157,
+                    "last_play": 165.0,
+                    "champImageUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jhin_0.jpg"
+                }
+            ],
+            "match_report": {
+                "total_matches": 5,
+                "avg_gold": 13484.2,
+                "avg_cs": 211.0,
+                "winrate_global": 40.0,
+                "champions": {
+                    "Darius": {
+                        "name": "Darius",
+                        "role": "TOP",
+                        "games": 1,
+                        "wins": 0,
+                        "kills": 1,
+                        "deaths": 6,
+                        "assists": 2,
+                        "gold": 13951,
+                        "cs": 308,
+                        "damage": 19565
+                    },
+                    "Pantheon": {
+                        "name": "Pantheon",
+                        "role": "TOP",
+                        "games": 3,
+                        "wins": 2,
+                        "kills": 46,
+                        "deaths": 12,
+                        "assists": 13,
+                        "gold": 43460,
+                        "cs": 587,
+                        "damage": 112233
+                    },
+                    "Aatrox": {
+                        "name": "Aatrox",
+                        "role": "TOP",
+                        "games": 1,
+                        "wins": 0,
+                        "kills": 6,
+                        "deaths": 4,
+                        "assists": 1,
+                        "gold": 10010,
+                        "cs": 160,
+                        "damage": 22463
+                    }
+                }
+            }
+        }
+    ]
+}

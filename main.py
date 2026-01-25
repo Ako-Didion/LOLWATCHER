@@ -8,6 +8,13 @@ import aiohttp
 from typing import Dict, List
 import json
 from dataclasses import asdict
+import time
+
+from aiolimiter import AsyncLimiter
+
+# Limite : 20 requêtes toutes les 1 seconde
+limiter = AsyncLimiter(18, 1)
+
 
 @dataclass
 class t_mastery:
@@ -22,6 +29,7 @@ class joueur:
     name: str
     level: str
     profilePicture : str
+    rank : str
 
 @dataclass
 class MatchStats:
@@ -64,6 +72,7 @@ class MatchStats:
 class ChampionSummary:
     """Stocke la synthèse pour un champion précis"""
     name: str
+    role : str
     games: int = 0
     wins: int = 0
     kills: int = 0
@@ -72,6 +81,7 @@ class ChampionSummary:
     gold: int = 0
     cs: int = 0
     damage: int = 0
+    
 
     @property
     def winrate(self) -> float:
@@ -92,10 +102,14 @@ class GlobalReport:
     champions: Dict[str, ChampionSummary] = field(default_factory=dict)
 
 @dataclass
-class FinalExport:
+class PlayerExport:
     player_info: joueur
     masteries: List[t_mastery]
     match_report: GlobalReport
+    
+@dataclass
+class FinalExport:
+    finalList : list[PlayerExport]        
     
 # /D:/Iut/lolWatcher/main.py
 # Simple Riot API client to fetch a summoner and their recent matches.
@@ -118,8 +132,6 @@ headers = {
 REGION_URL = "https://europe.api.riotgames.com"
 LOL_URL = "https://euw1.api.riotgames.com/lol"
 
-gameName = "cascade2chiasse"
-tagLine = "caca"
 
 # Construction de l'URL finale
 url = REGION_URL
@@ -154,16 +166,31 @@ def get_puuid(gameName,tagLine):
         print(f"le joueur :{gameName}#{tagLine} N'est pas dans la base de donées en Europe")
     return dataPuuid["puuid"]
 
-
-def get_player_profile(puuid):
+def get_rank_player(puuid):
+    res = ''
+    endPointForRankPlayer = f"/league/v4/entries/by-puuid/{puuid}"
+    url = LOL_URL+endPointForRankPlayer
+    response = requests.get(url,headers=headers)
+    data = response.json()
+    
+    if (data == []):
+        res = "UNRANKED"
+    else:
+        res = f"{data[0]["tier"]}"
+    
+    return res
+    
+    
+def get_player_profile(puuid,gameName):
     endPointProfile = f"/summoner/v4/summoners/by-puuid/{puuid}"
     url = LOL_URL+endPointProfile
     response = requests.get(url,headers=headers)
     data = response.json()
     urlP = f"https://ddragon.leagueoflegends.com/cdn/16.2.1/img/profileicon/{data["profileIconId"]}.png"
-    return joueur(name=gameName,level=data["summonerLevel"],profilePicture=urlP)
+    rang = get_rank_player(puuid)
+    return joueur(name=gameName,level=data["summonerLevel"],profilePicture=urlP,rank=rang)
     
-def get_the_masteries(puuid):
+def get_the_masteries(puuid,gameName,tagLine):
     endPoinForMasteries = f"/champion-mastery/v4/champion-masteries/by-puuid/{puuid}/top?count=5"
     url = LOL_URL+endPoinForMasteries
     response = requests.get(url,headers=headers)
@@ -192,8 +219,8 @@ def treats_masteries_information(champMasteries,champIdAndInfo):
             j=j+1
     return tabChampsBestMasteries
 
-def get_id_recents_games(puuid):
-    endPointForMatch=f"/lol/match/v5/matches/by-puuid/{puuid}/ids?start=0&count=40"
+def get_id_recents_games(puuid,gameName,tagLine):
+    endPointForMatch=f"/lol/match/v5/matches/by-puuid/{puuid}/ids?start=0&count=80"
     url = REGION_URL+endPointForMatch
     response = requests.get(url,headers=headers)
     if(response.status_code == 200):
@@ -226,9 +253,10 @@ def analyze_to_class(tabMatchStats: List[MatchStats]) -> GlobalReport:
     # Remplissage des stats par champion
     for m in valid_matches:
         if m.champion_name not in report.champions:
-            report.champions[m.champion_name] = ChampionSummary(name=m.champion_name)
+            report.champions[m.champion_name] = ChampionSummary(name=m.champion_name,role=m.position)
         
         c = report.champions[m.champion_name]
+        c.role = m.position
         c.games += 1
         c.wins += 1 if m.win else 0
         c.kills += m.kills
@@ -263,7 +291,8 @@ async def fetch_one_match(session, match_id, puuidJoueur):
         participants = match["info"]["participants"]
 
         for p in participants:
-            if p["puuid"] == puuidJoueur and match["info"]["gameMode"] == "CLASSIC":
+            if p["puuid"] == puuidJoueur and match["info"]["gameMode"] == "CLASSIC" :
+                print(match["info"]["gameMode"])
                 # On retourne l'objet MatchStats
                 return MatchStats(
                     champion_id=p["championId"],
@@ -285,50 +314,63 @@ async def fetch_one_match(session, match_id, puuidJoueur):
 
 # 2. Fonction principale asynchrone
 async def analyse_recent_games_async(recentsGames, puuidJoueur):
-    # On crée une session unique pour toutes les requêtes (plus rapide)
     async with aiohttp.ClientSession() as session:
         tasks = []
         for match_id in recentsGames:
-            # On prépare la tâche sans la lancer
-            tasks.append(fetch_one_match(session, match_id, puuidJoueur))
+            # 2. On encapsule l'appel pour qu'il respecte la limite
+            tasks.append(fetch_with_limit(session, match_id, puuidJoueur))
         
-        # On lance TOUTES les tâches en parallèle et on attend les résultats
         results = await asyncio.gather(*tasks)
-        
-        # On filtre les résultats pour enlever les éventuels "None" (erreurs)
         return [r for r in results if r is not None]
 
+# Fonction intermédiaire pour appliquer la limite
+async def fetch_with_limit(session, match_id, puuid):
+    async with limiter:  # C'est ici que ça bloque si on va trop vite
+        return await fetch_one_match(session, match_id, puuid)
+    
 async def main():
-    # 1. Récupération des données de base
-    puuid = get_puuid(gameName, tagLine)
-    player = get_player_profile(puuid)
-    champMasteries = get_the_masteries(puuid)
     
-    # 2. Traitement des maîtrises
-    tabChampsBestMasteries = treats_masteries_information(champMasteries, champIdAndInfo)
+    listJoueurData = []
+    # 'r' signifie read (lecture)
+    # encoding='utf-8' est important pour bien gérer les accents (é, à, ù)
+    with open('player.txt', 'r', encoding='utf-8') as f:
+        lignes = f.readlines()
+        for i in range(2,len(lignes),3):
+            if lignes[i].strip() != "pseudo#0000":
+                pseudo=(lignes[i].strip()).split("#")
+                listJoueurData.append([pseudo[0],pseudo[1]])
     
-    # 3. Récupération et analyse des matchs
-    idGames = get_id_recents_games(puuid)
-    tabMatchStats = await analyse_recent_games_async(idGames, puuid)
-    report = analyze_to_class(tabMatchStats)
+    listPlayersData = []
+    for i in range(len(listJoueurData)):
+        puuid = get_puuid(listJoueurData[i][0], listJoueurData[i][1])
+        player = get_player_profile(puuid,listJoueurData[i][0])
+        champMasteries = get_the_masteries(puuid,listJoueurData[i][0], listJoueurData[i][1])
     
-    # 4. Regroupement de TOUTES les données
-    # On crée l'objet final qui contient tout
-    final_data = FinalExport(
-        player_info=player,
-        masteries=tabChampsBestMasteries,
-        match_report=report
-    )
+        # 2. Traitement des maîtrises
+        tabChampsBestMasteries = treats_masteries_information(champMasteries, champIdAndInfo)
     
+        # 3. Récupération et analyse des matchs
+        idGames = get_id_recents_games(puuid,listJoueurData[i][0], listJoueurData[i][1])
+        tabMatchStats = await analyse_recent_games_async(idGames, puuid)
+        report = analyze_to_class(tabMatchStats)
+    
+        # 4. Regroupement de TOUTES les données
+        # On crée l'objet final qui contient tout
+        playerdata = PlayerExport(
+            player_info=player,
+            masteries=tabChampsBestMasteries,
+            match_report=report
+        )
+        listPlayersData.append(playerdata)
+        if i != len(listJoueurData)-1:
+            time.sleep(60)
+        
     # 5. Export en JSON
-    save_report_to_json(final_data, filename=f"stats_{gameName}.json")
+    final_data = FinalExport(finalList=listPlayersData)
+    save_report_to_json(final_data, filename=f"LOLWATCHER/stats_groupe.json")
 
 if __name__ == "__main__":
     asyncio.run(main())
     
-
-
-
-
 
 
