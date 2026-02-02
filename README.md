@@ -19,6 +19,18 @@
 
 ---
 
+## ⚠️ Important : Temps de Traitement / Processing Time
+
+En raison des limites de requêtes imposées par l'API de Riot Games, le script doit faire des pauses pour ne pas être bloqué.
+*Due to request limits imposed by the Riot Games API, the script must pause to avoid being blocked.*
+
+⏳ **Comptez environ 1 minute 30 secondes par joueur.**
+*⏳ **Expect approximately 1 minute 30 seconds per player.***
+
+*Exemple : Pour 4 joueurs, le script prendra environ 6 minutes.*
+
+---
+
 ## 📋 Prérequis & API / Prerequisites & API
 
 Pour utiliser ce projet, vous avez besoin de Python et d'une clé API Riot Games valide.
