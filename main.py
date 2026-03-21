@@ -1,4 +1,5 @@
 import os
+import re
 from datetime import datetime
 from dotenv import load_dotenv
 import requests
@@ -331,15 +332,19 @@ async def fetch_with_limit(session, match_id, puuid):
 async def main():
     
     listJoueurData = []
-    # 'r' signifie read (lecture)
-    # encoding='utf-8' est important pour bien gérer les accents (é, à, ù)
+
     with open('player.txt', 'r', encoding='utf-8') as f:
-        lignes = f.readlines()
-        for i in range(2,len(lignes),3):
-            if lignes[i].strip() != "pseudo#0000":
-                pseudo=(lignes[i].strip()).split("#")
-                listJoueurData.append([pseudo[0],pseudo[1]])
-    
+        lignes = f.readlines() # On récupère toutes les lignes du fichier 
+        
+        for i in range(len(lignes)):
+            ligne = lignes[i].strip()
+            
+            # On vérifie si la ligne contient un '#' (Riot ID) 
+            # Et on ignore le pseudo par défaut 'pseudo#0000' 
+            if "#" in ligne and ligne != "pseudo#0000":
+                pseudo, tag = ligne.split("#", 1)
+                listJoueurData.append([pseudo, tag])
+                
     listPlayersData = []
     for i in range(len(listJoueurData)):
         puuid = get_puuid(listJoueurData[i][0], listJoueurData[i][1])
@@ -367,7 +372,7 @@ async def main():
         
     # 5. Export en JSON
     final_data = FinalExport(finalList=listPlayersData)
-    save_report_to_json(final_data, filename=f"LOLWATCHER/stats_groupe.json")
+    save_report_to_json(final_data, filename=f"stats_groupe.json")
 
 if __name__ == "__main__":
     asyncio.run(main())
